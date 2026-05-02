@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/constant/text_styles.dart';
 import '../../../auth/presentation/screens/login_screen.dart';
-
+// completed
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
