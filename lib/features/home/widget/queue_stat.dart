@@ -4,7 +4,11 @@ class QueueStat extends StatelessWidget {
   final String number;
   final String label;
 
-  const QueueStat({super.key, required this.number, required this.label});
+  const QueueStat({
+    super.key,
+    required this.number,
+    required this.label,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +24,7 @@ class QueueStat extends StatelessWidget {
         ),
         Text(
           label,
-          style: const TextStyle(color: Colors.white70, fontSize: 13),
+          style: const TextStyle(color: Colors.white70),
         ),
       ],
     );
