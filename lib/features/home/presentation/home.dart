@@ -105,23 +105,40 @@ class HomeScreen extends StatelessWidget {
 
             const SizedBox(height: 20),
 
-            // 📊 QUEUE CARD
             Container(
               padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
                 color: const Color(0xFF1E88E5),
                 borderRadius: BorderRadius.circular(20),
               ),
-              child: const Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+              child: const Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  QueueStat(number: "44", label: "Waiting"),
-                  QueueStat(number: "15", label: "Services"),
-                  QueueStat(number: "12m", label: "Avg wait"),
+                  Text(
+                    "Today's Queue",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  SizedBox(height: 4),
+                  Text(
+                    "Live waiting overview across branches",
+                    style: TextStyle(color: Colors.white70, fontSize: 14),
+                  ),
+                  SizedBox(height: 20),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      QueueStat(number: "44", label: "Waiting"),
+                      QueueStat(number: "15", label: "Services"),
+                      QueueStat(number: "12m", label: "Avg wait"),
+                    ],
+                  ),
                 ],
               ),
             ),
-
             const SizedBox(height: 20),
 
             const Align(
