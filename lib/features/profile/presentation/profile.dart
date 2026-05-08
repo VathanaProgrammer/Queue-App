@@ -52,10 +52,7 @@ class Profilescreen extends StatelessWidget {
                         SizedBox(height: 4),
                         Text(
                           "+855 11 779 155",
-                          style: TextStyle(
-                            color: Colors.white70,
-                            fontSize: 13,
-                          ),
+                          style: TextStyle(color: Colors.white70, fontSize: 13),
                         ),
                       ],
                     ),
@@ -69,11 +66,7 @@ class Profilescreen extends StatelessWidget {
             // ================= LIST =================
             Expanded(
               child: ListView(
-                padding: const EdgeInsets.only(
-                  left: 16,
-                  right: 16,
-                  bottom: 20,
-                ),
+                padding: const EdgeInsets.only(left: 16, right: 16, bottom: 20),
                 children: [
                   _buildSection([
                     ProfileItem(

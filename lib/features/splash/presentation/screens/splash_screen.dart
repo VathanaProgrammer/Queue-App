@@ -12,34 +12,36 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  // @override
-  // void initState() {
-  //   super.initState();
+  @override
+  void initState() {
+    super.initState();
 
-  //   Timer(const Duration(seconds: 1), () {
-  //     if (!mounted) return;
+    Timer(const Duration(seconds: 1), () {
+      if (!mounted) return;
 
-  //     Navigator.pushReplacement(
-  //       context,
-  //       PageRouteBuilder(
-  //         transitionDuration: const Duration(milliseconds: 300),
-  //         pageBuilder: (_, __, ___) => const LoginScreen(),
-  //         transitionsBuilder: (_, animation, __, child) {
-  //           const begin = Offset(1.0, 0.0); // from right → left
-  //           const end = Offset.zero;
+      Navigator.pushReplacement(
+        context,
+        PageRouteBuilder(
+          transitionDuration: const Duration(milliseconds: 300),
+          pageBuilder: (_, __, ___) => const LoginScreen(),
+          transitionsBuilder: (_, animation, __, child) {
+            const begin = Offset(1.0, 0.0); // from right → left
+            const end = Offset.zero;
 
-  //           final tween = Tween(begin: begin, end: end)
-  //               .chain(CurveTween(curve: Curves.easeInOut));
+            final tween = Tween(
+              begin: begin,
+              end: end,
+            ).chain(CurveTween(curve: Curves.easeInOut));
 
-  //           return SlideTransition(
-  //             position: animation.drive(tween),
-  //             child: child,
-  //           );
-  //         },
-  //       ),
-  //     );
-  //   });
-  // }
+            return SlideTransition(
+              position: animation.drive(tween),
+              child: child,
+            );
+          },
+        ),
+      );
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
