@@ -8,7 +8,6 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // ✅ CLEAN DATA
     final List<Bank> banks = [
       Bank(
         letter: "A",
@@ -23,6 +22,13 @@ class HomeScreen extends StatelessWidget {
         services: "3 services available",
         waiting: "12 waiting",
         color: const Color(0xFF42A5F5),
+      ),
+      Bank(
+        letter: "C",
+        name: "Canadia Bank",
+        services: "4 services available",
+        waiting: "18 waiting",
+        color: const Color(0xFF64B5F6),
       ),
       Bank(
         letter: "C",

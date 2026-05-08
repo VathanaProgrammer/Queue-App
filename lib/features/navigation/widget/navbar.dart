@@ -22,6 +22,10 @@ class _NavBarScreenState extends State<NavBarScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // backgroundColor: Colors.transparent,
+      // extendBody: true,
+      backgroundColor: Colors.white,
+      extendBodyBehindAppBar: true,
       body: _screens[_currentIndex],
 
       bottomNavigationBar: SafeArea(

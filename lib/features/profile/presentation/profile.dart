@@ -14,6 +14,7 @@ class Profilescreen extends StatelessWidget {
           children: [
             const SizedBox(height: 16),
 
+            // ================= HEADER =================
             Container(
               margin: const EdgeInsets.symmetric(horizontal: 16),
               padding: const EdgeInsets.all(16),
@@ -21,32 +22,43 @@ class Profilescreen extends StatelessWidget {
                 gradient: const LinearGradient(
                   colors: [Color(0xFF1E3A8A), Color(0xFF2563EB)],
                 ),
-                borderRadius: BorderRadius.circular(16),
+                borderRadius: BorderRadius.circular(20),
               ),
               child: Row(
                 children: [
                   const CircleAvatar(
-                    radius: 28,
-                    backgroundImage: NetworkImage("https://ibb.co/sdng2qF9"),
+                    radius: 30,
+                    backgroundImage: NetworkImage(
+                      "https://docs.flutter.dev/assets/images/dash/dash-fainting.gif",
+                    ),
                   ),
+
                   const SizedBox(width: 16),
-                  const Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Sieng Vathana",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
+
+                  // FIX: prevent overflow + better layout
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: const [
+                        Text(
+                          "Sieng Vathana",
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
-                      ),
-                      SizedBox(height: 4),
-                      Text(
-                        "+855 11 779 155",
-                        style: TextStyle(color: Colors.white70),
-                      ),
-                    ],
+                        SizedBox(height: 4),
+                        Text(
+                          "+855 11 779 155",
+                          style: TextStyle(
+                            color: Colors.white70,
+                            fontSize: 13,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),
@@ -54,35 +66,36 @@ class Profilescreen extends StatelessWidget {
 
             const SizedBox(height: 20),
 
+            // ================= LIST =================
             Expanded(
-              child: Container(
-                margin: const EdgeInsets.symmetric(horizontal: 16),
-                padding: const EdgeInsets.symmetric(vertical: 10),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(16),
+              child: ListView(
+                padding: const EdgeInsets.only(
+                  left: 16,
+                  right: 16,
+                  bottom: 20,
                 ),
-                child: ListView(
-                  children: [
+                children: [
+                  _buildSection([
                     ProfileItem(
                       icon: Icons.person_outline,
                       title: "My Account",
-                      onTap: () {
-                        debugPrint("Go to My Account");
-                      },
+                      onTap: () {},
                     ),
                     ProfileItem(
                       icon: Icons.history,
                       title: "Queue History",
-                      onTap: () {
-                        debugPrint("Go to History");
-                      },
+                      onTap: () {},
                     ),
                     ProfileItem(
                       icon: Icons.favorite_border,
                       title: "Favorite Services",
                       onTap: () {},
                     ),
+                  ]),
+
+                  const SizedBox(height: 16),
+
+                  _buildSection([
                     ProfileItem(
                       icon: Icons.notifications_none,
                       title: "Notifications",
@@ -94,6 +107,11 @@ class Profilescreen extends StatelessWidget {
                       title: "Payment Methods",
                       onTap: () {},
                     ),
+                  ]),
+
+                  const SizedBox(height: 16),
+
+                  _buildSection([
                     ProfileItem(
                       icon: Icons.help_outline,
                       title: "Help & Support",
@@ -104,17 +122,19 @@ class Profilescreen extends StatelessWidget {
                       title: "Settings",
                       onTap: () {},
                     ),
+                  ]),
+
+                  const SizedBox(height: 16),
+
+                  _buildSection([
                     ProfileItem(
                       icon: Icons.logout,
                       title: "Log Out",
                       isLogout: true,
-                      onTap: () {
-                        // 👉 logout logic here
-                        debugPrint("Logout clicked");
-                      },
+                      onTap: () {},
                     ),
-                  ],
-                ),
+                  ]),
+                ],
               ),
             ),
           ],
@@ -122,4 +142,21 @@ class Profilescreen extends StatelessWidget {
       ),
     );
   }
+}
+
+Widget _buildSection(List<Widget> items) {
+  return Container(
+    decoration: BoxDecoration(
+      color: Colors.white,
+      borderRadius: BorderRadius.circular(16),
+      boxShadow: [
+        BoxShadow(
+          color: Colors.black.withOpacity(0.04),
+          blurRadius: 12,
+          offset: const Offset(0, 6),
+        ),
+      ],
+    ),
+    child: Column(children: items),
+  );
 }
