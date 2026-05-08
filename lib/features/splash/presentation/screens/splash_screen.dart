@@ -45,13 +45,7 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Center(
-        child: Text(
-          'VenQueue',
-          style: AppTextStyles.splashtitle,
-
-        ),
-      ),
+      body: Center(child: Text('VenQueue', style: AppTextStyles.splashtitle)),
     );
   }
 }
