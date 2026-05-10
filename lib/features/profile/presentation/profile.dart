@@ -29,7 +29,7 @@ class Profilescreen extends StatelessWidget {
                   const CircleAvatar(
                     radius: 30,
                     backgroundImage: NetworkImage(
-                      "https://docs.flutter.dev/assets/images/dash/dash-fainting.gif",
+                      "https://i.ibb.co/BVyr13CV/photo-2026-01-26-03-14-24.jpg",
                     ),
                   ),
 

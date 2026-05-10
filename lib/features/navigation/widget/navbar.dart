@@ -15,7 +15,13 @@ class _NavBarScreenState extends State<NavBarScreen> {
 
   final List<Widget> _screens = const [
     HomeScreen(),
-    Queuescreen(),
+    QueueScreen(
+      bankName: 'Testing',
+      bankLetter: 'Testing',
+      bankColor: Colors.white,
+      services: 'Testing',
+      waiting: 'Testing',
+    ),
     Profilescreen(),
   ];
 
@@ -24,7 +30,7 @@ class _NavBarScreenState extends State<NavBarScreen> {
     return Scaffold(
       // backgroundColor: Colors.transparent,
       // extendBody: true,
-      backgroundColor: Colors.white,
+      backgroundColor: const Color(0xFFF4F6FA),
       extendBodyBehindAppBar: true,
       body: _screens[_currentIndex],
 
