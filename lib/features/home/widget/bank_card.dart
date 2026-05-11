@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:venqueue/features/queue/presentation/queue.dart';
 
 class BankCard extends StatelessWidget {
   final String letter;
@@ -21,7 +22,24 @@ class BankCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onTap,
+      onTap:
+          onTap ??
+          () {
+            // Default navigation if onTap is not provided
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => QueueScreen(
+                  bankName: bankName,
+                  bankLetter: letter,
+                  bankColor: color,
+                  services: services,
+                  waiting: waiting,
+                ),
+              ),
+            );
+          },
+
       child: Container(
         margin: const EdgeInsets.only(bottom: 12),
         padding: const EdgeInsets.all(16),
@@ -30,24 +48,32 @@ class BankCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(16),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.05),
+              color: Colors.black.withValues(alpha: 0.05),
               blurRadius: 10,
               offset: const Offset(0, 4),
             ),
           ],
         ),
+
         child: Row(
           children: [
+            // Bank Letter Avatar
             CircleAvatar(
               radius: 24,
               backgroundColor: color.withOpacity(0.15),
               child: Text(
                 letter,
-                style: TextStyle(color: color, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                  color: color,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18,
+                ),
               ),
             ),
+
             const SizedBox(width: 16),
 
+            // Bank Information
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -59,18 +85,27 @@ class BankCard extends StatelessWidget {
                       fontSize: 16,
                     ),
                   ),
-                  Text(services, style: TextStyle(color: Colors.grey[600])),
+                  const SizedBox(height: 4),
+                  Text(
+                    services,
+                    style: TextStyle(color: Colors.grey[600], fontSize: 13),
+                  ),
                 ],
               ),
             ),
 
+            // Waiting Info
             Column(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Text(
                   waiting,
-                  style: const TextStyle(fontWeight: FontWeight.bold),
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 13,
+                  ),
                 ),
+                const SizedBox(height: 4),
                 const Icon(Icons.chevron_right, color: Colors.grey),
               ],
             ),

@@ -15,13 +15,23 @@ class _NavBarScreenState extends State<NavBarScreen> {
 
   final List<Widget> _screens = const [
     HomeScreen(),
-    Queuescreen(),
+    QueueScreen(
+      bankName: 'Testing',
+      bankLetter: 'Testing',
+      bankColor: Colors.white,
+      services: 'Testing',
+      waiting: 'Testing',
+    ),
     Profilescreen(),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // backgroundColor: Colors.transparent,
+      // extendBody: true,
+      backgroundColor: const Color(0xFFF4F6FA),
+      extendBodyBehindAppBar: true,
       body: _screens[_currentIndex],
 
       bottomNavigationBar: SafeArea(
@@ -30,7 +40,7 @@ class _NavBarScreenState extends State<NavBarScreen> {
           child: Container(
             height: 72,
             decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.75), // ← Improved
+              color: Colors.white.withOpacity(0.75),
               borderRadius: BorderRadius.circular(50),
               border: Border.all(
                 color: Colors.white.withOpacity(0.9),

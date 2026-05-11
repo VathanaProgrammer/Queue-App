@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:venqueue/features/home/widget/bank_card.dart';
 import 'package:venqueue/features/home/widget/queue_stat.dart';
 import 'package:venqueue/features/home/model/bank_model.dart';
+import 'package:venqueue/features/queue/presentation/queue.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // ✅ CLEAN DATA
     final List<Bank> banks = [
       Bank(
         letter: "A",
@@ -31,16 +31,27 @@ class HomeScreen extends StatelessWidget {
         waiting: "18 waiting",
         color: const Color(0xFF64B5F6),
       ),
+      Bank(
+        letter: "C",
+        name: "Canadia Bank",
+        services: "4 services available",
+        waiting: "18 waiting",
+        color: const Color(0xFF64B5F6),
+      ),
     ];
 
     return Scaffold(
-      backgroundColor: const Color(0xFFF8F9FA),
+      backgroundColor: const Color(0xFFF4F6FA),
 
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: const Color(0xFFF4F6FA),
+        surfaceTintColor: const Color(0xFFF4F6FA),
+        shadowColor: Colors.transparent,
         elevation: 0,
+        scrolledUnderElevation: 0,
         toolbarHeight: 100,
         automaticallyImplyLeading: false,
+
         title: const Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -73,13 +84,16 @@ class HomeScreen extends StatelessWidget {
             ),
           ],
         ),
-        actions: const [
+
+        actions: [
           Padding(
-            padding: EdgeInsets.only(right: 16),
+            padding: const EdgeInsets.only(right: 16),
             child: CircleAvatar(
               radius: 26,
-              backgroundColor: Colors.pink,
-              child: Text("👧"),
+              backgroundColor: const Color(0xFF64B5F6),
+              backgroundImage: const NetworkImage(
+                'https://i.ibb.co/BVyr13CV/photo-2026-01-26-03-14-24.jpg',
+              ),
             ),
           ),
         ],
@@ -89,7 +103,6 @@ class HomeScreen extends StatelessWidget {
         padding: const EdgeInsets.all(16),
         child: Column(
           children: [
-            // 🔍 SEARCH
             TextField(
               decoration: InputDecoration(
                 hintText: "Search bank or service...",
@@ -102,7 +115,6 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
             ),
-
             const SizedBox(height: 20),
 
             Container(
@@ -148,10 +160,8 @@ class HomeScreen extends StatelessWidget {
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
               ),
             ),
-
             const SizedBox(height: 10),
 
-            // 📋 LIST
             Expanded(
               child: ListView.builder(
                 itemCount: banks.length,
@@ -165,7 +175,18 @@ class HomeScreen extends StatelessWidget {
                     waiting: bank.waiting,
                     color: bank.color,
                     onTap: () {
-                      debugPrint("Clicked ${bank.name}");
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => QueueScreen(
+                            bankName: bank.name,
+                            bankLetter: bank.letter,
+                            bankColor: bank.color,
+                            services: bank.services,
+                            waiting: bank.waiting,
+                          ),
+                        ),
+                      );
                     },
                   );
                 },
