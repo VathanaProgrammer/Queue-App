@@ -3,9 +3,15 @@ import 'package:venqueue/features/home/model/bank_model.dart';
 import 'package:venqueue/features/home/widget/bank_card.dart';
 import 'package:venqueue/features/queue/presentation/screens/queuelink.dart';
 
-class QueueScreen extends StatelessWidget {
-  QueueScreen({super.key});
+class QueueScreen extends StatefulWidget {
+  const QueueScreen({super.key});
 
+  @override
+  State<QueueScreen> createState() => _QueueScreenState();
+}
+
+class _QueueScreenState extends State<QueueScreen> {
+  final TextEditingController searchController = TextEditingController();
   final List<Bank> banks = [
     Bank(
       letter: "A",
@@ -36,6 +42,26 @@ class QueueScreen extends StatelessWidget {
       color: const Color(0xFF64B5F6),
     ),
   ];
+
+  List<Bank> filteredBanks = [];
+
+  @override
+  void initState() {
+    super.initState();
+    filteredBanks = banks;
+  }
+
+  void searchBank(String query) {
+    final result = banks.where((bank) {
+      final nameLower = bank.name.toLowerCase();
+      final searchLower = query.toLowerCase();
+      return nameLower.contains(searchLower);
+    }).toList();
+
+    setState(() {
+      filteredBanks = result;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -83,8 +109,9 @@ class QueueScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 15),
 
-                // 🔍 SEARCH BAR
                 TextField(
+                  controller: searchController,
+                  onChanged: searchBank,
                   decoration: InputDecoration(
                     hintText: "Search bank...",
                     prefixIcon: const Icon(Icons.search),
@@ -100,7 +127,6 @@ class QueueScreen extends StatelessWidget {
               ],
             ),
           ),
-
           const SizedBox(height: 15),
 
           Padding(
@@ -114,52 +140,58 @@ class QueueScreen extends StatelessWidget {
               ],
             ),
           ),
-
           const SizedBox(height: 10),
 
           Expanded(
-            child: ListView.builder(
-              padding: const EdgeInsets.all(16),
-              itemCount: banks.length,
-              itemBuilder: (context, index) {
-                final bank = banks[index];
+            child: filteredBanks.isEmpty
+                ? const Center(
+                    child: Text(
+                      "No Bank Found",
+                      style: TextStyle(color: Colors.grey),
+                    ),
+                  )
+                : ListView.builder(
+                    padding: const EdgeInsets.all(16),
+                    itemCount: banks.length,
+                    itemBuilder: (context, index) {
+                      final bank = banks[index];
 
-                return Container(
-                  margin: const EdgeInsets.only(bottom: 14),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(18),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withValues(alpha: 0.05),
-                        blurRadius: 10,
-                        offset: const Offset(0, 5),
-                      ),
-                    ],
-                  ),
-                  child: BankCard(
-                    letter: bank.letter,
-                    bankName: bank.name,
-                    services: bank.services,
-                    waiting: bank.waiting,
-                    color: bank.color,
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => QueueLink(
-                            bankName: bank.name,
-                            bankLetter: bank.letter,
-                            bankColor: bank.color,
-                            services: bank.services,
-                            waiting: bank.waiting,
-                          ),
+                      return Container(
+                        margin: const EdgeInsets.only(bottom: 14),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(18),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withValues(alpha: 0.05),
+                              blurRadius: 10,
+                              offset: const Offset(0, 5),
+                            ),
+                          ],
+                        ),
+                        child: BankCard(
+                          letter: bank.letter,
+                          bankName: bank.name,
+                          services: bank.services,
+                          waiting: bank.waiting,
+                          color: bank.color,
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => QueueLink(
+                                  bankName: bank.name,
+                                  bankLetter: bank.letter,
+                                  bankColor: bank.color,
+                                  services: bank.services,
+                                  waiting: bank.waiting,
+                                ),
+                              ),
+                            );
+                          },
                         ),
                       );
                     },
                   ),
-                );
-              },
-            ),
           ),
         ],
       ),
