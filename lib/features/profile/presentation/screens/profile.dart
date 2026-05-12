@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:venqueue/features/profile/widget/profile_item.dart';
+import 'package:venqueue/features/profile/presentation/widget/profile_item.dart';
 
 class Profilescreen extends StatelessWidget {
   const Profilescreen({super.key});
@@ -144,7 +144,7 @@ Widget _buildSection(List<Widget> items) {
       borderRadius: BorderRadius.circular(16),
       boxShadow: [
         BoxShadow(
-          color: Colors.black.withOpacity(0.04),
+          color: Colors.black.withValues(alpha: 0.04),
           blurRadius: 12,
           offset: const Offset(0, 6),
         ),

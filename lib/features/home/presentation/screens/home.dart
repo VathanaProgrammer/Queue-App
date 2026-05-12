@@ -1,15 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:venqueue/features/home/widget/bank_card.dart';
-import 'package:venqueue/features/home/widget/queue_stat.dart';
-import 'package:venqueue/features/home/model/bank_model.dart';
-import 'package:venqueue/features/queue/presentation/queue.dart';
+import 'package:venqueue/features/home/presentation/widget/bank_card.dart';
+import 'package:venqueue/features/home/presentation/widget/queue_stat.dart';
+import 'package:venqueue/features/home/presentation/model/bank_model.dart';
+import 'package:venqueue/features/queue/presentation/screens/queuelink.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final List<Bank> banks = [
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  final TextEditingController searchController = TextEditingController();
+
+  late List<Bank> banks;
+  List<Bank> filteredBanks = [];
+
+  @override
+  void initState() {
+    super.initState();
+
+    banks = [
       Bank(
         letter: "A",
         name: "ACLEDA Bank",
@@ -31,15 +43,21 @@ class HomeScreen extends StatelessWidget {
         waiting: "18 waiting",
         color: const Color(0xFF64B5F6),
       ),
-      Bank(
-        letter: "C",
-        name: "Canadia Bank",
-        services: "4 services available",
-        waiting: "18 waiting",
-        color: const Color(0xFF64B5F6),
-      ),
     ];
 
+    filteredBanks = banks;
+  }
+
+  void searchBank(String query) {
+    setState(() {
+      filteredBanks = banks.where((bank) {
+        return bank.name.toLowerCase().contains(query.toLowerCase());
+      }).toList();
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFF4F6FA),
 
@@ -104,11 +122,14 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           children: [
             TextField(
+              controller: searchController,
+              onChanged: searchBank,
               decoration: InputDecoration(
-                hintText: "Search bank or service...",
+                hintText: "Search bank...",
                 prefixIcon: const Icon(Icons.search),
                 filled: true,
                 fillColor: Colors.white,
+                contentPadding: const EdgeInsets.symmetric(vertical: 0),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(30),
                   borderSide: BorderSide.none,
@@ -163,34 +184,41 @@ class HomeScreen extends StatelessWidget {
             const SizedBox(height: 10),
 
             Expanded(
-              child: ListView.builder(
-                itemCount: banks.length,
-                itemBuilder: (context, index) {
-                  final bank = banks[index];
+              child: filteredBanks.isEmpty
+                  ? const Center(
+                      child: Text(
+                        "No Bank Found",
+                        style: TextStyle(color: Colors.grey),
+                      ),
+                    )
+                  : ListView.builder(
+                      itemCount: filteredBanks.length,
+                      itemBuilder: (context, index) {
+                        final bank = filteredBanks[index];
 
-                  return BankCard(
-                    letter: bank.letter,
-                    bankName: bank.name,
-                    services: bank.services,
-                    waiting: bank.waiting,
-                    color: bank.color,
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => QueueScreen(
-                            bankName: bank.name,
-                            bankLetter: bank.letter,
-                            bankColor: bank.color,
-                            services: bank.services,
-                            waiting: bank.waiting,
-                          ),
-                        ),
-                      );
-                    },
-                  );
-                },
-              ),
+                        return BankCard(
+                          letter: bank.letter,
+                          bankName: bank.name,
+                          services: bank.services,
+                          waiting: bank.waiting,
+                          color: bank.color,
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => QueueLink(
+                                  bankName: bank.name,
+                                  bankLetter: bank.letter,
+                                  bankColor: bank.color,
+                                  services: bank.services,
+                                  waiting: bank.waiting,
+                                ),
+                              ),
+                            );
+                          },
+                        );
+                      },
+                    ),
             ),
           ],
         ),

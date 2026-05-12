@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:venqueue/features/navigation/widget/navbar.dart';
+import 'package:venqueue/features/navigation/presentation/widget/navbar.dart';
 import '../../features/splash/presentation/screens/splash_screen.dart';
 import '../../features/auth/presentation/screens/login_screen.dart';
 import '../../features/auth/presentation/screens/signup_screen.dart';
