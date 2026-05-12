@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:venqueue/features/profile/widget/profile_item.dart';
+import 'package:venqueue/features/profile/presentation/widget/profile_item.dart';
 
 class Profilescreen extends StatelessWidget {
   const Profilescreen({super.key});

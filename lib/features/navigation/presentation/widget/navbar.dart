@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:venqueue/features/home/presentation/home.dart';
-import 'package:venqueue/features/profile/presentation/profile.dart';
+import 'package:venqueue/features/home/presentation/screens/home.dart';
+import 'package:venqueue/features/profile/presentation/screens/profile.dart';
 import 'package:venqueue/features/queue/presentation/screens/queue.dart';
 
 class NavBarScreen extends StatefulWidget {

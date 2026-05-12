@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:venqueue/features/home/model/bank_model.dart';
-import 'package:venqueue/features/home/widget/bank_card.dart';
+import 'package:venqueue/features/home/presentation/model/bank_model.dart';
+import 'package:venqueue/features/home/presentation/widget/bank_card.dart';
 import 'package:venqueue/features/queue/presentation/screens/queuelink.dart';
 
 class QueueScreen extends StatefulWidget {

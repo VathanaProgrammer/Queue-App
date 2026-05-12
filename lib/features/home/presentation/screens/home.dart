@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:venqueue/features/home/widget/bank_card.dart';
-import 'package:venqueue/features/home/widget/queue_stat.dart';
-import 'package:venqueue/features/home/model/bank_model.dart';
+import 'package:venqueue/features/home/presentation/widget/bank_card.dart';
+import 'package:venqueue/features/home/presentation/widget/queue_stat.dart';
+import 'package:venqueue/features/home/presentation/model/bank_model.dart';
 import 'package:venqueue/features/queue/presentation/screens/queuelink.dart';
 
 class HomeScreen extends StatefulWidget {
