@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:venqueue/features/home/presentation/home.dart';
 import 'package:venqueue/features/profile/presentation/profile.dart';
-import 'package:venqueue/features/queue/presentation/queue.dart';
+import 'package:venqueue/features/queue/presentation/screens/queue.dart';
 
 class NavBarScreen extends StatefulWidget {
   const NavBarScreen({super.key});
@@ -13,16 +13,10 @@ class NavBarScreen extends StatefulWidget {
 class _NavBarScreenState extends State<NavBarScreen> {
   int _currentIndex = 0;
 
-  final List<Widget> _screens = const [
-    HomeScreen(),
-    QueueScreen(
-      bankName: 'Testing',
-      bankLetter: 'Testing',
-      bankColor: Colors.white,
-      services: 'Testing',
-      waiting: 'Testing',
-    ),
-    Profilescreen(),
+  final List<Widget> _screens = [
+    const HomeScreen(),
+    QueueScreen(),
+    const Profilescreen(),
   ];
 
   @override
@@ -40,10 +34,10 @@ class _NavBarScreenState extends State<NavBarScreen> {
           child: Container(
             height: 72,
             decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.75),
+              color: Colors.white.withValues(alpha: 0.75),
               borderRadius: BorderRadius.circular(50),
               border: Border.all(
-                color: Colors.white.withOpacity(0.9),
+                color: Colors.white.withValues(alpha: 0.9),
                 width: 1.2,
               ),
               boxShadow: const [
@@ -73,14 +67,18 @@ class _NavBarScreenState extends State<NavBarScreen> {
                           decoration: BoxDecoration(
                             color: const Color(
                               0xFF1E88E5,
-                            ).withOpacity(0.15), // ← Blue tint
+                            ).withValues(alpha: 0.15), // ← Blue tint
                             borderRadius: BorderRadius.circular(40),
                             border: Border.all(
-                              color: const Color(0xFF1E88E5).withOpacity(0.25),
+                              color: const Color(
+                                0xFF1E88E5,
+                              ).withValues(alpha: 0.25),
                             ),
                             boxShadow: [
                               BoxShadow(
-                                color: const Color(0xFF1E88E5).withOpacity(0.2),
+                                color: const Color(
+                                  0xFF1E88E5,
+                                ).withValues(alpha: 0.2),
                                 blurRadius: 12,
                                 spreadRadius: 1,
                               ),

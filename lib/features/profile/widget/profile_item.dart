@@ -21,7 +21,7 @@ class ProfileItem extends StatelessWidget {
     return ListTile(
       onTap: onTap,
       leading: CircleAvatar(
-        backgroundColor: Colors.blue.withOpacity(0.1),
+        backgroundColor: Colors.blue.withValues(alpha: 0.1),
         child: Icon(icon, color: Colors.blue),
       ),
       title: Text(

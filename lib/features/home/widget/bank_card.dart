@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:venqueue/features/queue/presentation/queue.dart';
+import 'package:venqueue/features/queue/presentation/screens/queuelink.dart';
 
 class BankCard extends StatelessWidget {
   final String letter;
@@ -29,7 +29,7 @@ class BankCard extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => QueueScreen(
+                builder: (context) => QueueLink(
                   bankName: bankName,
                   bankLetter: letter,
                   bankColor: color,
@@ -60,7 +60,7 @@ class BankCard extends StatelessWidget {
             // Bank Letter Avatar
             CircleAvatar(
               radius: 24,
-              backgroundColor: color.withOpacity(0.15),
+              backgroundColor: color.withValues(alpha: 0.15),
               child: Text(
                 letter,
                 style: TextStyle(

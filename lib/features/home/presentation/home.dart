@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:venqueue/features/home/widget/bank_card.dart';
 import 'package:venqueue/features/home/widget/queue_stat.dart';
 import 'package:venqueue/features/home/model/bank_model.dart';
-import 'package:venqueue/features/queue/presentation/queue.dart';
+import 'package:venqueue/features/queue/presentation/screens/queuelink.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -178,7 +178,7 @@ class HomeScreen extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => QueueScreen(
+                          builder: (context) => QueueLink(
                             bankName: bank.name,
                             bankLetter: bank.letter,
                             bankColor: bank.color,
